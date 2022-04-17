@@ -1,12 +1,5 @@
 pipeline {
-     agent {
-        docker {
-            image 'mcr.microsoft.com/dotnet/core/sdk:3.1'
-        }
-     }
-     environment {
-    DOTNET_CLI_HOME = "/tmp/DOTNET_CLI_HOME"
-}
+    agent any
      triggers {
         githubPush()
       }
@@ -36,10 +29,11 @@ pipeline {
                sh 'dotnet publish WebApplication/WebApplication.csproj --configuration Release --no-restore'
              }
         }
-         stage('Deploy') {
-               milestone()
+        stage('Deploy'){
+             steps{
                echo "Deploying..."
-               }       
-      
-    
+             }
+        }        
+    }
 }
+      
