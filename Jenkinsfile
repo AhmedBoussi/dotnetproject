@@ -1,5 +1,12 @@
 pipeline {
-    agent any
+     agent {
+        docker {
+            image 'mcr.microsoft.com/dotnet/sdk:6.0'
+        }
+     }
+     environment {
+    DOTNET_CLI_HOME = "/tmp/DOTNET_CLI_HOME"
+}
      triggers {
         githubPush()
       }
